@@ -4,6 +4,7 @@
   "description": "",
   "main": "index.js",
   "scripts": {
+    "dev": "tsx watch src/server.ts",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "keywords": [],
@@ -15,6 +16,7 @@
   },
   "devDependencies": {
     "@graphql-tools/load-files": "^7.0.0",
+    "@prisma/client": "^4.16.0",
     "@typescript-eslint/eslint-plugin": "^5.60.0",
     "eslint": "^8.43.0",
     "eslint-config-prettier": "^8.8.0",
@@ -24,6 +26,7 @@
     "eslint-plugin-prettier": "^4.2.1",
     "eslint-plugin-promise": "^6.1.1",
     "prettier": "^2.8.8",
+    "prisma": "^4.16.0",
     "tsx": "^3.12.7",
     "typescript": "^5.1.3"
   }
