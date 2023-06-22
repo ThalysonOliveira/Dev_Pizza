@@ -8,6 +8,9 @@ class CreateUserController {
     try {
       await this.createUser.execute(input);
     } catch (error) {
+      if (error instanceof Error) {
+        return error.message;
+      }
       return error as string;
     }
 
