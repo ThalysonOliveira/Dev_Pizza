@@ -1,3 +1,4 @@
+import authenticationTypeDefs from './authentication';
 import usersTypeDefs from './users';
 
-export default [...usersTypeDefs] as string[];
+export default [...usersTypeDefs, authenticationTypeDefs];

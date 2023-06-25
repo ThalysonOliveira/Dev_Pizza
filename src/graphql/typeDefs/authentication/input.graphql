@@ -1,0 +1,4 @@
+input AuthenticationInput {
+  email: String!
+  password: String!
+}
