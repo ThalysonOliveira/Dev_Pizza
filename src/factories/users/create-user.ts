@@ -1,4 +1,4 @@
-import { CreateUserController } from '../../controllers/users';
+import { CreateUserController } from '../../presentation/controllers/users';
 import { CreateUserService } from '../../data/services/users';
 import { CreateUserPrisma } from '../../infra/database/prisma/repositories/users/create-user-prisma';
 import { FindUserByEmailPrisma } from '../../infra/database/prisma/repositories/users/find-user-by-email-prisma';

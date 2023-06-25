@@ -1,5 +1,10 @@
 /* eslint-disable no-unused-vars */
-import { CreateUser, UserData } from '../../domain/useCases/users/create-user';
+
+import {
+  CreateUser,
+  UserData,
+} from '../../../domain/useCases/users/create-user';
+import { getErrorResponse } from '../../errors';
 
 class CreateUserController {
   constructor(private createUser: CreateUser) {}
@@ -7,14 +12,10 @@ class CreateUserController {
   async handle(input: UserData): Promise<string> {
     try {
       await this.createUser.execute(input);
+      return 'User created with success!';
     } catch (error) {
-      if (error instanceof Error) {
-        return error.message;
-      }
-      return error as string;
+      return getErrorResponse(error);
     }
-
-    return 'User created with success!';
   }
 }
 

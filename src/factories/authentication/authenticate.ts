@@ -1,4 +1,4 @@
-import { AuthenticateController } from '../../controllers/autentication';
+import { AuthenticateController } from '../../presentation/controllers/autentication';
 import { AuthenticationService } from '../../data/services/authentication/authenticate';
 import { FindUserByEmailPrisma } from '../../infra/database/prisma/repositories/users/find-user-by-email-prisma';
 import { EncrypterAdapter } from '../../infra/protocols/encrypter/encrypter-adapter';
