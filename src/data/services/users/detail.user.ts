@@ -8,8 +8,6 @@ class DetailUserService implements DetailUser {
   async execute(id: string): Promise<Partial<User>> {
     const userResult = await this.findUserById.execute(id);
 
-    if (!userResult) throw new Error('Invalid user/Not authorized.');
-
     return {
       id: userResult.id,
       name: userResult.name,
