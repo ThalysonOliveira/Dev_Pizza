@@ -1,4 +1,3 @@
-/* eslint-disable no-unused-vars */
 import { Encrypter } from '../../../data/protocols/encrypter';
 import { compareSync, hashSync } from 'bcrypt';
 

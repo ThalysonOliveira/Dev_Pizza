@@ -1,4 +1,3 @@
-/* eslint-disable no-unused-vars */
 import { Authentication } from '../../../domain/useCases/authentication/authenticate';
 import { getErrorResponse } from '../../errors';
 

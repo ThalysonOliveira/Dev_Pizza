@@ -1,5 +1,3 @@
-/* eslint-disable no-unused-vars */
-
 type TokenPayload = {
   id: string;
   iat: number;

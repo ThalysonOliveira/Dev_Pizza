@@ -1,4 +1,3 @@
-/* eslint-disable no-unused-vars */
 import { User } from '../../../domain/models/user';
 import { DetailUser } from '../../../domain/useCases/users';
 import { FindUserByIdRepository } from '../../repositories/users/find-user-by-id';

@@ -1,4 +1,3 @@
-/* eslint-disable no-unused-vars */
 import { User } from '../../../domain/models/user';
 
 interface FindUserByIdRepository {
