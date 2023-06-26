@@ -6,4 +6,4 @@ interface CreateCategory {
   execute: (input: CategoryData) => Promise<string>;
 }
 
-export { CreateCategory };
+export { CreateCategory, CategoryData };
