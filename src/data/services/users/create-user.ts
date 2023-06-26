@@ -1,10 +1,9 @@
+import { Encrypter } from '@data/protocols';
 import {
-  CreateUser,
-  UserData,
-} from '../../../domain/useCases/users/create-user';
-import { Encrypter } from '../../protocols/encrypter';
-import { CreateUserRepository } from '../../repositories/users/create-user';
-import { FindUserByEmailRepository } from '../../repositories/users/find-user-by-email';
+  CreateUserRepository,
+  FindUserByEmailRepository,
+} from '@data/repositories/users';
+import { CreateUser, UserData } from '@domain/useCases/users';
 
 class CreateUserService implements CreateUser {
   constructor(

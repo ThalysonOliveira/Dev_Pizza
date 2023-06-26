@@ -1,6 +1,6 @@
-import { TokenAdapter } from '../../../infra/protocols/token/token-adapter';
-import { Requester } from '../../../types/middlewares';
-import { notAuthorized } from '../../errors';
+import { TokenAdapter } from '@infra/protocols/token';
+import { notAuthorized } from '@presentation/errors';
+import { Requester } from '@type/middlewares';
 
 class ContextController {
   context({ req }: Requester) {

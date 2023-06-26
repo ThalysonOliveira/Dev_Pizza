@@ -1,7 +1,7 @@
-import { Authentication } from '../../../domain/useCases/authentication/authenticate';
-import { authenticationFailed } from '../../../presentation/errors';
-import { Encrypter, Token } from '../../protocols';
-import { FindUserByEmailRepository } from '../../repositories/users/find-user-by-email';
+import { Encrypter, Token } from '@data/protocols';
+import { FindUserByEmailRepository } from '@data/repositories/users';
+import { Authentication } from '@domain/useCases/authentication';
+import { authenticationFailed } from '@presentation/errors';
 
 class AuthenticationService implements Authentication {
   constructor(

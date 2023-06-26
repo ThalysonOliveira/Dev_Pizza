@@ -1,6 +1,6 @@
-import { User } from '../../../domain/models/user';
-import { DetailUser } from '../../../domain/useCases/users';
-import { invalidUserOrNotAuthorized } from '../../errors';
+import { User } from '@domain/models';
+import { DetailUser } from '@domain/useCases/users';
+import { invalidUserOrNotAuthorized } from '@presentation/errors';
 
 class DetailUserController {
   constructor(private detailUser: DetailUser) {}

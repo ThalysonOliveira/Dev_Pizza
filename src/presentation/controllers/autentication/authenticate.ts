@@ -1,5 +1,5 @@
-import { Authentication } from '../../../domain/useCases/authentication/authenticate';
-import { getErrorResponse } from '../../errors';
+import { Authentication } from '@domain/useCases/authentication';
+import { getErrorResponse } from '@presentation/errors';
 
 class AuthenticateController {
   constructor(private authentication: Authentication) {}

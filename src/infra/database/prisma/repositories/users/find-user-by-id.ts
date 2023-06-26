@@ -1,6 +1,6 @@
+import { FindUserByIdRepository } from '@data/repositories/users';
+import { User } from '@domain/models';
 import prismaClient from '../..';
-import { FindUserByIdRepository } from '../../../../../data/repositories/users/find-user-by-id';
-import { User } from '../../../../../domain/models/user';
 
 class FindUserByIdPrisma implements FindUserByIdRepository {
   execute(id: string): Promise<User> {

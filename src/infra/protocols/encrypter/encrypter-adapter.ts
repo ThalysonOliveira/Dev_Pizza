@@ -1,4 +1,4 @@
-import { Encrypter } from '../../../data/protocols/encrypter';
+import { Encrypter } from '@data/protocols';
 import { compareSync, hashSync } from 'bcrypt';
 
 class EncrypterAdapter implements Encrypter {

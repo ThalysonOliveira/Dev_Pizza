@@ -1,8 +1,8 @@
-import { AuthenticateController } from '../../presentation/controllers/autentication';
-import { AuthenticationService } from '../../data/services/authentication/authenticate';
-import { FindUserByEmailPrisma } from '../../infra/database/prisma/repositories/users/find-user-by-email-prisma';
-import { EncrypterAdapter } from '../../infra/protocols/encrypter/encrypter-adapter';
-import { TokenAdapter } from '../../infra/protocols/token/token-adapter';
+import { AuthenticationService } from '@data/services/authentication';
+import { FindUserByEmailPrisma } from '@infra/database/prisma/repositories/users';
+import { EncrypterAdapter } from '@infra/protocols/encrypter';
+import { TokenAdapter } from '@infra/protocols/token';
+import { AuthenticateController } from '@presentation/controllers/autentication';
 
 const makeAuthentication = () => {
   const encrypter = new EncrypterAdapter(8);

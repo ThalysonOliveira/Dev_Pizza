@@ -1,8 +1,5 @@
-import {
-  CreateUser,
-  UserData,
-} from '../../../domain/useCases/users/create-user';
-import { getErrorResponse } from '../../errors';
+import { CreateUser, UserData } from '@domain/useCases/users';
+import { getErrorResponse } from '@presentation/errors';
 
 class CreateUserController {
   constructor(private createUser: CreateUser) {}

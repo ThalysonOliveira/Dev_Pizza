@@ -1,5 +1,5 @@
-import { makeAuthentication } from '../../../factories/authentication/authenticate';
-import { InputType } from '../../../types';
+import { makeAuthentication } from '@factories/authentication/authenticate';
+import { InputType } from '@type/generics';
 
 export default {
   Mutation: {

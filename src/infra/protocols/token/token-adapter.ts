@@ -1,4 +1,4 @@
-import { Token, TokenPayload } from '../../../data/protocols';
+import { Token, TokenPayload } from '@data/protocols';
 import { sign, verify } from 'jsonwebtoken';
 
 const JWT_SECRET = process.env.JWT_SECRET as string;

@@ -1,6 +1,6 @@
-import { User } from '../../../domain/models/user';
-import { DetailUser } from '../../../domain/useCases/users';
-import { FindUserByIdRepository } from '../../repositories/users/find-user-by-id';
+import { FindUserByIdRepository } from '@data/repositories/users';
+import { User } from '@domain/models';
+import { DetailUser } from '@domain/useCases/users';
 
 class DetailUserService implements DetailUser {
   constructor(private findUserById: FindUserByIdRepository) {}

@@ -1,8 +1,10 @@
-import { CreateUserController } from '../../presentation/controllers/users';
-import { CreateUserService } from '../../data/services/users';
-import { CreateUserPrisma } from '../../infra/database/prisma/repositories/users/create-user-prisma';
-import { FindUserByEmailPrisma } from '../../infra/database/prisma/repositories/users/find-user-by-email-prisma';
-import { EncrypterAdapter } from '../../infra/protocols/encrypter/encrypter-adapter';
+import { CreateUserService } from '@data/services/users';
+import {
+  CreateUserPrisma,
+  FindUserByEmailPrisma,
+} from '@infra/database/prisma/repositories/users';
+import { EncrypterAdapter } from '@infra/protocols/encrypter';
+import { CreateUserController } from '@presentation/controllers/users';
 
 const makeCreateUser = () => {
   const encrypter = new EncrypterAdapter(8);

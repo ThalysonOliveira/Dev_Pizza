@@ -1,6 +1,6 @@
-import { InputType } from '../../../types';
-import { UserData } from '../../../domain/useCases/users/create-user';
-import { makeCreateUser } from '../../../factories/users/create-user';
+import { UserData } from '@domain/useCases/users';
+import { makeCreateUser } from '@factories/users';
+import { InputType } from '@type/generics';
 
 export default {
   Mutation: {

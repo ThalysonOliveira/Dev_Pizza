@@ -1,5 +1,5 @@
-import { makeDetailUser } from '../../../factories/users';
-import { Context } from '../../../types/middlewares';
+import { makeDetailUser } from '@factories/users';
+import { Context } from '@type/middlewares';
 
 export default {
   Query: {
