@@ -1,5 +1,5 @@
-import { Token } from '@data/protocols';
 import { CompareEncrypt } from '@data/protocols/encrypter';
+import { CreateToken } from '@data/protocols/token';
 import { FindUserByEmailRepository } from '@data/repositories/users';
 import { Authentication } from '@domain/useCases/authentication';
 import { authenticationFailed } from '@presentation/errors';
@@ -8,7 +8,7 @@ class AuthenticationService implements Authentication {
   constructor(
     private findUserByEmailRepository: FindUserByEmailRepository,
     private compareEncrypt: CompareEncrypt,
-    private token: Token
+    private createToken: CreateToken
   ) {}
   async execute(email: string, password: string): Promise<string> {
     const userAlreadyExist = await this.findUserByEmailRepository.execute(
@@ -24,7 +24,7 @@ class AuthenticationService implements Authentication {
 
     if (!passwordCompare) return authenticationFailed();
 
-    return this.token.createToken(userAlreadyExist);
+    return this.createToken.execute(userAlreadyExist);
   }
 }
 
