@@ -4,6 +4,12 @@ import { ApolloServer } from 'apollo-server';
 import typeDefs from './graphql/typeDefs';
 import resolvers from './graphql/resolvers';
 
-const server = new ApolloServer({ typeDefs, resolvers });
+import { makeContext } from './factories/middlewares/context';
+
+const server = new ApolloServer({
+  typeDefs,
+  resolvers,
+  context: makeContext(),
+});
 
 server.listen().then(({ url }) => console.log(`Server running in ${url}`));
