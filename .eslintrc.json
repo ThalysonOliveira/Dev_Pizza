@@ -13,7 +13,10 @@
     "prettier"
   ],
   "rules": {
-    "no-unused-vars": "error",
+    "no-unused-vars": [
+      "error",
+      { "vars": "all", "args": "none", "ignoreRestSiblings": false }
+    ],
     "prettier/prettier": [
       "error",
       {
