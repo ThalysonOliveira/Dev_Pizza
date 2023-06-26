@@ -1,5 +1,6 @@
 /* eslint-disable no-unused-vars */
 import { Authentication } from '../../../domain/useCases/authentication/authenticate';
+import { authenticationFailed } from '../../../presentation/errors';
 import { Encrypter, Token } from '../../protocols';
 import { FindUserByEmailRepository } from '../../repositories/users/find-user-by-email';
 
@@ -14,14 +15,14 @@ class AuthenticationService implements Authentication {
       email
     );
 
-    if (!userAlreadyExist) throw new Error('Email/password invalid.');
+    if (!userAlreadyExist) return authenticationFailed();
 
     const passwordCompare = this.encrypter.compareEncrypt(
       password,
       userAlreadyExist.password
     );
 
-    if (!passwordCompare) throw new Error('Email/password invalid.');
+    if (!passwordCompare) return authenticationFailed();
 
     return this.token.createToken(userAlreadyExist);
   }
