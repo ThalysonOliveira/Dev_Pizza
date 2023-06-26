@@ -1,16 +1,12 @@
-import { Encrypter } from '@data/protocols';
-import { compareSync, hashSync } from 'bcrypt';
+import { hashSync } from 'bcrypt';
+import { Encrypt } from '@data/protocols/encrypter';
 
-class EncrypterAdapter implements Encrypter {
+class EncryptAdapter implements Encrypt {
   constructor(private readonly salt: number) {}
 
-  encrypt(value: string): string {
+  execute(value: string): string {
     return hashSync(value, this.salt);
-  }
-
-  compareEncrypt(compareValue: string, hashValue: string): boolean {
-    return compareSync(compareValue, hashValue);
   }
 }
 
-export { EncrypterAdapter };
+export { EncryptAdapter };
