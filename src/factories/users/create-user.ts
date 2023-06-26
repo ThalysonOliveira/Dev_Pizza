@@ -3,17 +3,17 @@ import {
   CreateUserPrisma,
   FindUserByEmailPrisma,
 } from '@infra/database/prisma/repositories/users';
-import { EncrypterAdapter } from '@infra/protocols/encrypter';
+import { EncryptAdapter } from '@infra/protocols/encrypter';
 import { CreateUserController } from '@presentation/controllers/users';
 
 const makeCreateUser = () => {
-  const encrypter = new EncrypterAdapter(8);
+  const encrypt = new EncryptAdapter(8);
   const createUserRepository = new CreateUserPrisma();
   const findUserbyEmail = new FindUserByEmailPrisma();
   const createUserService = new CreateUserService(
     findUserbyEmail,
     createUserRepository,
-    encrypter
+    encrypt
   );
   return new CreateUserController(createUserService);
 };

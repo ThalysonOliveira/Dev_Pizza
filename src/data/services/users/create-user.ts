@@ -1,4 +1,4 @@
-import { Encrypter } from '@data/protocols';
+import { Encrypt } from '@data/protocols/encrypter';
 import {
   CreateUserRepository,
   FindUserByEmailRepository,
@@ -9,7 +9,7 @@ class CreateUserService implements CreateUser {
   constructor(
     private findUserByEmailRepository: FindUserByEmailRepository,
     private createUserRepository: CreateUserRepository,
-    private encrypter: Encrypter
+    private encrypt: Encrypt
   ) {}
   async execute(input: UserData): Promise<void> {
     const emailAlreadyExist = await this.findUserByEmailRepository.execute(
@@ -18,7 +18,7 @@ class CreateUserService implements CreateUser {
 
     if (emailAlreadyExist) throw new Error('Email already exists.');
 
-    const hashedPassword = this.encrypter.encrypt(input.password);
+    const hashedPassword = this.encrypt.execute(input.password);
 
     Object.assign(input, { password: hashedPassword });
 
