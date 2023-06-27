@@ -1,0 +1,7 @@
+input CreateProductInput {
+  name: String!
+  price: String!
+  description: String!
+  banner: String
+  categoryId: String!
+}
