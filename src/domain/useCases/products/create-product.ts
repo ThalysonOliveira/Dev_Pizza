@@ -1,5 +1,3 @@
-import { Product } from '@domain/models/product';
-
 type ProductData = {
   name: string;
   price: string;
@@ -8,7 +6,7 @@ type ProductData = {
 };
 
 interface CreateProduct {
-  execute: (input: ProductData) => Promise<Product>;
+  execute: (input: ProductData) => Promise<void>;
 }
 
 export { CreateProduct, ProductData };
