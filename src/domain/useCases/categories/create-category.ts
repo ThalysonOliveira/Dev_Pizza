@@ -3,7 +3,7 @@ type CategoryData = {
 };
 
 interface CreateCategory {
-  execute: (input: CategoryData) => Promise<string>;
+  execute: (input: CategoryData) => Promise<void>;
 }
 
 export { CreateCategory, CategoryData };
