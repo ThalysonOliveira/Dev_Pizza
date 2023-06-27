@@ -1,7 +1,7 @@
 import { Category } from '@domain/models/category';
 
 interface FindAllCategory {
-  execute: () => Promise<Category[]>;
+  execute: () => Promise<Partial<Category>[]>;
 }
 
 export { FindAllCategory };
