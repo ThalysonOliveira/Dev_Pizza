@@ -2,10 +2,7 @@ import {
   CreateCategoryRepository,
   FindCategoryByNameRepository,
 } from '@data/repositories/categories';
-import {
-  CategoryData,
-  CreateCategory,
-} from '@domain/useCases/categories/create-category';
+import { CategoryData, CreateCategory } from '@domain/useCases/categories';
 
 class CreateCategoryService implements CreateCategory {
   constructor(
