@@ -8,7 +8,7 @@ class FindAllCategoryService implements FindAllCategory {
   async execute(): Promise<Partial<Category>[]> {
     const findAllCategoryResult = await this.findAllCategory.execute();
 
-    return findAllCategoryResult.map(({ name }) => ({ name }));
+    return findAllCategoryResult.map(({ id, name }) => ({ id, name }));
   }
 }
 export { FindAllCategoryService };
