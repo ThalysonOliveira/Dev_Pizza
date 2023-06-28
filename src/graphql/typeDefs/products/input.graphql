@@ -5,3 +5,6 @@ input CreateProductInput {
   banner: String
   categoryId: String!
 }
+input ListAllProductsByCategoryInput{
+  categoryId: String!
+}
