@@ -12,3 +12,7 @@ input AddItemToOrderInput {
   productId: String!
   amount: Int!
 }
+
+input RemoveItemOrderInput{
+  orderId: String!
+}

@@ -2,6 +2,7 @@ import { ItemData, OrderData } from '@domain/useCases/order';
 import {
   makeAddItemToOrder,
   makeCreateOrder,
+  makeRemoveItemOrder,
   makeRemoveOrder,
 } from '@factories/order';
 import { InputType } from '@type/generics';
@@ -33,6 +34,14 @@ export default {
     ) => {
       userIdContextValidate(userId);
       return makeAddItemToOrder().handle(input);
+    },
+    removeItemOrder: (
+      _: never,
+      { input: { orderId } }: InputType<{ orderId: string }>,
+      { userId }: Context
+    ) => {
+      userIdContextValidate(userId);
+      return makeRemoveItemOrder().handle(orderId);
     },
   },
 };
