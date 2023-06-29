@@ -6,3 +6,9 @@ input CreateOrderInput {
 input RemoveOrderInput {
   orderId: String!
 }
+
+input AddItemToOrderInput {
+  orderId: String!
+  productId: String!
+  amount: Int!
+}

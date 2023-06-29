@@ -5,3 +5,10 @@ type Order {
   draft: Boolean
   status: Boolean
 }
+
+type ItemOrder {
+  id: String
+  order_id: String
+  product_id: String
+  amount: Int
+}
