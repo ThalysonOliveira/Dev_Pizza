@@ -2,6 +2,7 @@ import {
   CreateOrderRepository,
   FindOrderByTableRepository,
 } from '@data/repositories/order';
+import { Order } from '@domain/models';
 import { CreateOrder, OrderData } from '@domain/useCases/order';
 
 class CreateOrderService implements CreateOrder {
@@ -9,12 +10,23 @@ class CreateOrderService implements CreateOrder {
     private findOrderByTableRepository: FindOrderByTableRepository,
     private createOrderRepository: CreateOrderRepository
   ) {}
-  async execute({ table, name }: OrderData): Promise<void> {
-    const orderTable = await this.findOrderByTableRepository.execute(table);
+  async execute(input: OrderData): Promise<Partial<Order>> {
+    const orderTable = await this.findOrderByTableRepository.execute(
+      input.table
+    );
 
     if (orderTable) throw new Error('Table already exists.');
 
-    await this.createOrderRepository.execute({ table, name });
+    const { id, name, draft, status, table } =
+      await this.createOrderRepository.execute(input);
+
+    return {
+      id,
+      table,
+      name,
+      draft,
+      status,
+    };
   }
 }
 

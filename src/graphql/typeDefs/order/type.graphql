@@ -1,0 +1,7 @@
+type Order {
+  id: String
+  table: Int
+  name: String
+  draft: Boolean
+  status: Boolean
+}

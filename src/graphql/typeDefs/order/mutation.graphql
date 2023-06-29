@@ -1,4 +1,4 @@
 type Mutation {
-  createOrder(input: CreateOrderInput!): String
+  createOrder(input: CreateOrderInput!): Order
   removeOrder(input: RemoveOrderInput!): String
 }
