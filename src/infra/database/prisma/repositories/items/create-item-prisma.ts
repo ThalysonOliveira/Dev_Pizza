@@ -4,9 +4,13 @@ import { ItemData } from '@domain/useCases/order';
 import prismaClient from '../..';
 
 class CreateItemPrisma implements CreateItemRepository {
-  execute(input: ItemData): Promise<Item> {
+  execute({ orderId, productId, amount }: ItemData): Promise<Item> {
     return prismaClient.item.create({
-      data: input as any,
+      data: {
+        order_id: orderId,
+        product_id: productId,
+        amount,
+      },
     }) as Promise<Item>;
   }
 }
