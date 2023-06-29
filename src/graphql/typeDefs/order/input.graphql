@@ -2,3 +2,7 @@ input CreateOrderInput {
   table: Int!
   name: String
 }
+
+input RemoveOrderInput {
+  orderId: String!
+}
