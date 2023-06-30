@@ -4,6 +4,7 @@ import {
   makeCreateOrder,
   makeRemoveItemOrder,
   makeRemoveOrder,
+  makeSendOrder,
 } from '@factories/order';
 import { InputType } from '@type/generics';
 import { Context } from '@type/middlewares';
@@ -42,6 +43,14 @@ export default {
     ) => {
       userIdContextValidate(userId);
       return makeRemoveItemOrder().handle(orderId);
+    },
+    sendOrder: (
+      _: never,
+      { input: { orderId } }: InputType<{ orderId: string }>,
+      { userId }: Context
+    ) => {
+      userIdContextValidate(userId);
+      return makeSendOrder().handle(orderId);
     },
   },
 };
