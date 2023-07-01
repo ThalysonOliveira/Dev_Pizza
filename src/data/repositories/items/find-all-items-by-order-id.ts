@@ -1,7 +1,7 @@
-import { Item } from '@domain/models';
+import { RelatedItem } from '@domain/models';
 
 interface FindAllItemsByOrderIdRepository {
-  execute: (orderId: string) => Promise<Item[]>;
+  execute: (orderId: string) => Promise<RelatedItem[]>;
 }
 
 export { FindAllItemsByOrderIdRepository };
