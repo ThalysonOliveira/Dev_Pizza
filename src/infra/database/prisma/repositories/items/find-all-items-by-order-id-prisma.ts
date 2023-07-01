@@ -1,18 +1,18 @@
 import { FindAllItemsByOrderIdRepository } from '@data/repositories/items';
-import { Item } from '@domain/models';
+import { RelatedItem } from '@domain/models';
 import prismaClient from '../..';
 
 class FindAllItemsByOrderIdPrisma implements FindAllItemsByOrderIdRepository {
-  execute(orderId: string): Promise<Item[]> {
+  execute(orderId: string): Promise<RelatedItem[]> {
     return prismaClient.item.findMany({
       where: {
         order_id: orderId,
       },
       include: {
-        prodcut: true,
+        product: true,
         order: true,
       },
-    }) as Promise<Item[]>;
+    }) as Promise<RelatedItem[]>;
   }
 }
 
