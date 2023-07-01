@@ -2,6 +2,7 @@ import { ItemData, OrderData } from '@domain/useCases/order';
 import {
   makeAddItemToOrder,
   makeCreateOrder,
+  makeFinishOrder,
   makeRemoveItemOrder,
   makeRemoveOrder,
   makeSendOrder,
@@ -51,6 +52,14 @@ export default {
     ) => {
       userIdContextValidate(userId);
       return makeSendOrder().handle(orderId);
+    },
+    finishOrder: (
+      _: never,
+      { input: { orderId } }: InputType<{ orderId: string }>,
+      { userId }: Context
+    ) => {
+      userIdContextValidate(userId);
+      return makeFinishOrder().handle(orderId);
     },
   },
 };

@@ -24,3 +24,7 @@ input SendOrderInput {
 input DetailOrderInput {
   orderId: String!
 }
+
+input FinishOrderInput {
+  orderId: String!
+}
