@@ -15,7 +15,8 @@ class CreateOrderService implements CreateOrder {
       input.table
     );
 
-    if (orderTable) throw new Error('Table already exists.');
+    if (orderTable && !orderTable.status)
+      throw new Error('Table already exists.');
 
     const { id, name, draft, status, table } =
       await this.createOrderRepository.execute(input);
