@@ -12,3 +12,12 @@ type ItemOrder {
   product_id: String
   amount: Int
 }
+
+type RelatedItem {
+  id: String
+  order_id: String
+  product_id: String
+  amount: Int
+  product: Product
+  order: Order
+}
