@@ -4,3 +4,4 @@ export * from './add-item-to-order';
 export * from './remove-item-order';
 export * from './send-order';
 export * from './list-Orders';
+export * from './detail-order';
