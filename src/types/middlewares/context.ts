@@ -8,6 +8,11 @@ type Headers = {
 
 type Req = {
   headers: Headers;
+  body: Body;
+};
+
+type Body = {
+  operationName: string;
 };
 
 type Requester = {

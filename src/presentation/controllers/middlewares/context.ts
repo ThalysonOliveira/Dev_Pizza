@@ -7,6 +7,12 @@ class ContextController {
     const { headers } = req;
     const { authorization } = headers;
 
+    if (
+      req.body.operationName === 'Authentication' ||
+      req.body.operationName === 'CreateUser'
+    )
+      return {};
+
     if (!authorization) return notAuthorized();
 
     const [, token] = authorization.split(' ');
