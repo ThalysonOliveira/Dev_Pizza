@@ -5,24 +5,26 @@ import express from 'express';
 import typeDefs from './graphql/typeDefs';
 import resolvers from './graphql/resolvers';
 
-// import { makeContext } from './factories/middlewares/context';
+import { makeContext } from './factories/middlewares/context';
 
 const app = express();
 
 const server = new ApolloServer({
   typeDefs,
   resolvers,
-  // context: makeContext(),
+  context: makeContext(),
 });
 
-const startServer = async () => {
+const startServer = async (port: number) => {
   await server.start();
   server.applyMiddleware({ app });
-  app.listen({ port: 3002 }, () =>
-    console.log(`🚀 Server ready at http://localhost:3002${server.graphqlPath}`)
+  app.listen({ port }, () =>
+    console.log(
+      `🚀 Server ready at http://localhost:${port}${server.graphqlPath}`
+    )
   );
 };
 
-startServer();
+const port = Number(process.env.PORT);
 
-// server.listen().then(({ url }) => console.log(`Server running in ${url}`));
+startServer(port);
