@@ -1,0 +1,22 @@
+{
+  "presets": [
+    ["@babel/preset-env", { "targets": { "node": "current" } }],
+    "@babel/preset-typescript"
+  ],
+  "plugins": [
+    [
+      "module-resolver",
+      {
+        "alias": {
+          "@presentation": "./src/presentation",
+          "@infra": "./src/infra",
+          "@domain": "./src/domain/domain",
+          "@data": "./src/data",
+          "@factories": "./src/factories",
+          "@type": "./src/types",
+          "@utils": "./src/utils"
+        }
+      }
+    ]
+  ]
+}
