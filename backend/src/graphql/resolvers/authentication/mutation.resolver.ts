@@ -1,4 +1,4 @@
-import { makeAuthentication } from '@factories/authentication/authenticate';
+import { makeAuthentication } from '@factories/authentication';
 import { InputType } from '@type/generics';
 
 export default {
