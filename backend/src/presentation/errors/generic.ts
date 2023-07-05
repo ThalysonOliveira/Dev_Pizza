@@ -1,9 +1,19 @@
-const getErrorResponse = (error: unknown): string => {
+import { GraphQLError } from 'graphql';
+
+const getErrorResponse = (error: unknown): GraphQLError => {
   if (error instanceof Error) {
-    return error.message;
+    console.log({
+      message: error.message,
+      error: error.stack,
+    });
+
+    throw new GraphQLError(error.message, {
+      extensions: { exception: { stacktrace: [] } },
+    });
   }
 
-  return error as string;
+  console.log({ error });
+  throw new GraphQLError(error as string);
 };
 
 export { getErrorResponse };
