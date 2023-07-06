@@ -1,9 +1,9 @@
 import { VerifyTokenAdapter } from '@infra/protocols/token';
 import { getErrorResponse, notAuthorized } from '@presentation/errors';
-import { Requester } from '@type/middlewares';
+import { Context, Requester } from '@type/middlewares';
 
 class ContextController {
-  context({ req }: Requester) {
+  context({ req }: Requester): Partial<Context> {
     const { headers } = req;
     const { authorization } = headers;
 
