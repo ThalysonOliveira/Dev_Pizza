@@ -1,6 +1,6 @@
 import { GraphQLError } from 'graphql';
 
-const getErrorResponse = (error: unknown): GraphQLError => {
+const getErrorResponse = (error: unknown): GraphQLError | any => {
   if (error instanceof Error) {
     console.log({
       message: error.message,
