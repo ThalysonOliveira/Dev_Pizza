@@ -1,10 +1,15 @@
 import { ListAllProductsByCategory } from '@domain/useCases/products';
+import { getErrorResponse } from '@presentation/errors';
 
 class ListAllProductsByCategoryController {
   constructor(private listAllProductsByCategory: ListAllProductsByCategory) {}
 
   handle(categoryId: string) {
-    return this.listAllProductsByCategory.execute(categoryId);
+    try {
+      return this.listAllProductsByCategory.execute(categoryId);
+    } catch (error) {
+      return getErrorResponse(error);
+    }
   }
 }
 
