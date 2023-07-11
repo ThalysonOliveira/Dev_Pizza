@@ -4,6 +4,7 @@ import Image from "next/image";
 import { Input } from "@/components/ui/Input";
 import { Button } from "@/components/ui/Button";
 import { ContainerCenter, Form, Login, Text } from "../../home";
+import Link from "next/link";
 
 export default function Home() {
   return (
@@ -21,7 +22,9 @@ export default function Home() {
             <Button loading={false}>Acessar</Button>
           </Form>
 
-          <Text>Não possuiu uma conta? Cadastre-se</Text>
+          <Link href="/signup">
+            <Text>Não possuiu uma conta? Cadastre-se</Text>
+          </Link>
         </Login>
       </ContainerCenter>
     </>
