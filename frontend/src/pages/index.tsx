@@ -3,8 +3,7 @@ import LogoImg from "../../public/logo.svg";
 import Image from "next/image";
 import { Input } from "@/components/ui/Input";
 import { Button } from "@/components/ui/Button";
-import { ContainerCenter, Form, Login, Text } from "../../home";
-import Link from "next/link";
+import { ContainerCenter, Form, LinkInfo, Login, Text } from "../../home";
 
 export default function Home() {
   return (
@@ -22,9 +21,9 @@ export default function Home() {
             <Button loading={false}>Acessar</Button>
           </Form>
 
-          <Link href="/signup">
+          <LinkInfo href="/signup">
             <Text>Não possuiu uma conta? Cadastre-se</Text>
-          </Link>
+          </LinkInfo>
         </Login>
       </ContainerCenter>
     </>

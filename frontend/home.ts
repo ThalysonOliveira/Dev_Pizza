@@ -1,5 +1,6 @@
 "use client"
 import { styled } from "styled-components";
+import Link from "next/link";
 
 export const ContainerCenter = styled.div`
     min-height: 100vh;
@@ -22,6 +23,12 @@ export const Login = styled.div`
     @media (max-width: 620px) {
         width: 90%;
     }
+`
+
+export const LinkInfo = styled(Link)`
+    margin-top: 1rem;
+    color: var(--white);
+    cursor: pointer;  
 `
 
 export const Text = styled.a`

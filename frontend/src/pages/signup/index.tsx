@@ -4,7 +4,7 @@ import Image from "next/image";
 import { Input } from "@/components/ui/Input";
 import { Button } from "@/components/ui/Button";
 import Link from "next/link";
-import { ContainerCenter, Form, Login, Text } from "../../../home";
+import { ContainerCenter, Form, LinkInfo, Login, Text } from "../../../home";
 
 export default function Signup() {
   return (
@@ -23,9 +23,9 @@ export default function Signup() {
             <Button loading={false}>Cadastrar</Button>
           </Form>
 
-          <Link href={"/"}>
+          <LinkInfo href={"/"}>
             <Text>Já possuiu uma conta? Faça login!</Text>
-          </Link>
+          </LinkInfo>
         </Login>
       </ContainerCenter>
     </>
