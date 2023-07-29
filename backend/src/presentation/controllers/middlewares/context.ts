@@ -1,20 +1,13 @@
 import { VerifyTokenAdapter } from '@infra/protocols/token';
-import { getErrorResponse, notAuthorized } from '@presentation/errors';
 import { Context, Requester } from '@type/middlewares';
 
 class ContextController {
-  context({ req }: Requester): Partial<Context> {
+  context({ req }: Requester): Partial<Context> | null {
     const { headers } = req;
     const { authorization } = headers;
 
     try {
-      if (
-        req.body.operationName === 'Authentication' ||
-        req.body.operationName === 'CreateUser'
-      )
-        return {};
-
-      if (!authorization) return notAuthorized();
+      if (!authorization) return {};
 
       const [, token] = authorization.split(' ');
       const verifyTokenAdapter = new VerifyTokenAdapter();
@@ -22,7 +15,7 @@ class ContextController {
 
       return { userId };
     } catch (error) {
-      return getErrorResponse(error);
+      return {};
     }
   }
 }
