@@ -4,8 +4,27 @@ import Image from "next/image";
 import { Input } from "@/components/ui/Input";
 import { Button } from "@/components/ui/Button";
 import { ContainerCenter, Form, LinkInfo, Login, Text } from "../../home";
+import { FormEvent, useContext, useState } from "react";
+import { AuthContext } from "@/contexts/AuthContext";
 
 export default function Home() {
+  const { signIn } = useContext(AuthContext);
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+
+  async function handleLogin(event: FormEvent) {
+    event.preventDefault();
+
+    let authData = {
+      input: {
+        email,
+        password,
+      },
+    };
+
+    await signIn(authData);
+  }
+
   return (
     <>
       <Head>
@@ -15,9 +34,19 @@ export default function Home() {
         <Image src={LogoImg} alt="Logo Dev Pizza" />
 
         <Login>
-          <Form>
-            <Input type="text" placeholder="Seu email" />
-            <Input type="password" placeholder="Sua senha" />
+          <Form onSubmit={handleLogin}>
+            <Input
+              type="text"
+              placeholder="Seu email"
+              value={email}
+              onChange={(event) => setEmail(event.target.value)}
+            />
+            <Input
+              type="password"
+              placeholder="Sua senha"
+              value={password}
+              onChange={(event) => setPassword(event.target.value)}
+            />
             <Button loading={false}>Acessar</Button>
           </Form>
 
