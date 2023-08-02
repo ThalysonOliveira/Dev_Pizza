@@ -3,7 +3,6 @@ import LogoImg from "../../../public/logo.svg";
 import Image from "next/image";
 import { Input } from "@/components/ui/Input";
 import { Button } from "@/components/ui/Button";
-import Link from "next/link";
 import { ContainerCenter, Form, LinkInfo, Login, Text } from "../../../home";
 
 export default function Signup() {
