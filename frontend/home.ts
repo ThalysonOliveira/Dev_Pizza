@@ -31,7 +31,7 @@ export const LinkInfo = styled(Link)`
     cursor: pointer;  
 `
 
-export const Text = styled.a`
+export const Text = styled.p`
     margin-top: 1rem;
     color: var(--white);
     cursor: pointer;
