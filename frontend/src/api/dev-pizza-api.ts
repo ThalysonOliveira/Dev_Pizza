@@ -1,23 +1,17 @@
-import { ApolloClient, HttpLink, ApolloLink, InMemoryCache, concat } from '@apollo/client';
+import { ApolloClient, InMemoryCache } from "@apollo/client";
+import { parseCookies } from "nookies";
 
 const API_URL = process.env.NEXT_PUBLIC_DEV_PIZZA_API
 
-const httpLink = new HttpLink({ uri: API_URL });
+export function setupAPIClient(ctx = undefined) {
+    let cookies = parseCookies(ctx);
 
-const authMiddleware = new ApolloLink((operation, forward) => {
-    const TOKEN = JSON.parse(localStorage.getItem('token') as string)
-
-    operation.setContext(({ headers = {} }) => ({
+    return new ApolloClient({
+        uri: API_URL,
+        cache: new InMemoryCache(),
         headers: {
-            ...headers,
-            Authorization: `Bearer ${TOKEN || null}`,
+            Authorization: `Bearer ${cookies['@nextauth.token']}`
         }
-    }));
+    })
+}
 
-    return forward(operation);
-})
-
-export const client = new ApolloClient({
-    cache: new InMemoryCache(),
-    link: concat(authMiddleware, httpLink),
-});
