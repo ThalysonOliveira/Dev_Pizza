@@ -51,7 +51,6 @@ export function AuthProvider({ children }: AuthProviderProps) {
     })
       .then((data) => {
         localStorage.setItem("token", JSON.stringify(data.data.authentication));
-        //TODO: Inserir o Authorization bearer token
         Router.push("/dashboard");
         toast.success("Usuário logado com sucesso.");
       })
