@@ -1,8 +1,8 @@
-import { AUTHENTICATION, CREATE_USER } from "@/api/querys";
-import { useMutation } from "@apollo/client";
+import { AUTHENTICATION, CREATE_USER, DETAIL_USER } from "@/api/querys";
+import { useMutation, useQuery } from "@apollo/client";
 import Router from "next/router";
-import { destroyCookie, setCookie } from "nookies";
-import { ReactNode, createContext, useState } from "react";
+import { destroyCookie, parseCookies, setCookie } from "nookies";
+import { ReactNode, createContext, useEffect, useState } from "react";
 import { toast } from "react-toastify";
 
 type AuthContextData = {
@@ -54,6 +54,15 @@ export function AuthProvider({ children }: AuthProviderProps) {
   const isAuthenticated = !!user;
   const [authentication] = useMutation(AUTHENTICATION);
   const [createUser] = useMutation(CREATE_USER);
+  const { error } = useQuery(DETAIL_USER);
+
+  const { "@nextauth.token": token } = parseCookies();
+
+  useEffect(() => {
+    if (token && error) {
+      signOut();
+    }
+  }, [error]);
 
   async function signIn({ input: { email, password } }: SigInProps) {
     authentication({
