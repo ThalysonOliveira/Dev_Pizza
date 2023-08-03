@@ -1,4 +1,4 @@
-import { AUTHENTICATION } from "@/api/querys";
+import { AUTHENTICATION, CREATE_USER } from "@/api/querys";
 import { useMutation } from "@apollo/client";
 import Router from "next/router";
 import { ReactNode, createContext, useState } from "react";
@@ -9,6 +9,7 @@ type AuthContextData = {
   isAuthenticated: boolean;
   signIn: (credentials: SigInProps) => Promise<void>;
   signOut: () => void;
+  signUp: (data: SignUpProps) => Promise<void>;
 };
 
 type SigInProps = {
@@ -28,12 +29,21 @@ type AuthProviderProps = {
   children: ReactNode;
 };
 
+type SignUpProps = {
+  input: {
+    name: string;
+    email: string;
+    password: string;
+  };
+};
+
 export const AuthContext = createContext({} as AuthContextData);
 
 export function AuthProvider({ children }: AuthProviderProps) {
   const [user, setUser] = useState<UserProps>({} as UserProps);
   const isAuthenticated = !!user;
   const [authentication] = useMutation(AUTHENTICATION);
+  const [createUser] = useMutation(CREATE_USER);
 
   async function signIn({ input: { email, password } }: SigInProps) {
     authentication({
@@ -43,7 +53,7 @@ export function AuthProvider({ children }: AuthProviderProps) {
         localStorage.setItem("token", JSON.stringify(data.data.authentication));
         //TODO: Inserir o Authorization bearer token
         Router.push("/dashboard");
-        toast.success("Usuário logado com sucesso!");
+        toast.success("Usuário logado com sucesso.");
       })
       .catch((error) => toast.error(error.message));
   }
@@ -52,8 +62,27 @@ export function AuthProvider({ children }: AuthProviderProps) {
     localStorage.removeItem("token");
   }
 
+  async function signUp({ input: { name, email, password } }: SignUpProps) {
+    createUser({
+      variables: {
+        input: {
+          name,
+          email,
+          password,
+        },
+      },
+    })
+      .then((_data) => {
+        Router.push("/");
+        toast.success("Usuário cadastrado com sucesso.");
+      })
+      .catch((error) => toast.error(error.message));
+  }
+
   return (
-    <AuthContext.Provider value={{ user, isAuthenticated, signIn, signOut }}>
+    <AuthContext.Provider
+      value={{ user, isAuthenticated, signIn, signOut, signUp }}
+    >
       {children}
     </AuthContext.Provider>
   );
