@@ -2,14 +2,18 @@ import { Header } from "@/components/ui/Header";
 import Head from "next/head";
 import { ButtonAdd, Container, FormCategory, InputCategory } from "./styles";
 import { FormEvent, useState } from "react";
+import { useMutation } from "@apollo/client";
+import { toast } from "react-toastify";
+import { CREATE_CATEGORY } from "@/api/querys";
 
 export default function Category() {
   const [name, setName] = useState("");
+  const [createCategory] = useMutation(CREATE_CATEGORY);
 
   async function handleAddCategory(event: FormEvent) {
     event.preventDefault();
 
-    alert(name);
+    if (!name) return toast.warning("Nome da categoria não pode estar vazio.");
 
     const categoryDate = {
       input: {
@@ -17,7 +21,11 @@ export default function Category() {
       },
     };
 
-    //Todo: call register category
+    createCategory({
+      variables: categoryDate,
+    })
+      .then(() => toast.success("Categoria criada com sucesso."))
+      .catch((error) => toast.error(error.message));
 
     setName("");
   }
