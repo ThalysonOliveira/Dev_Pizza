@@ -5,6 +5,7 @@ import { FormEvent, useState } from "react";
 import { useMutation } from "@apollo/client";
 import { toast } from "react-toastify";
 import { CREATE_CATEGORY } from "@/api/querys";
+import { canSSRAuth } from "@/utils/canSSRAuth";
 
 export default function Category() {
   const [name, setName] = useState("");
@@ -54,3 +55,9 @@ export default function Category() {
     </>
   );
 }
+
+export const getServerSideProps = canSSRAuth(async (ctx) => {
+  return {
+    props: {},
+  };
+});
