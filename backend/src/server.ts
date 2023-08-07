@@ -8,6 +8,7 @@ import resolvers from './graphql/resolvers';
 import { makeContext } from './factories/middlewares/context';
 
 const app = express();
+app.use(express.json({ limit: '1mb' }));
 
 const server = new ApolloServer({
   typeDefs,
