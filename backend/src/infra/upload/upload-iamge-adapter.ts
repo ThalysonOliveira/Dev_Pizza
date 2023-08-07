@@ -26,6 +26,7 @@ class UploadImageAdapter implements UploadImage {
         Bucket: SDK_BUCKET_NAME,
         Key: image.name,
         Body: Buffer.from(JSON.stringify(image)),
+        ContentType: image.type,
       });
       await this.client.send(command);
     } catch (error) {
