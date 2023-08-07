@@ -66,5 +66,40 @@ export const ButtonAddCategory = styled.button`
     background-color: var(--green-900);
     font-size: 1.2rem;
     font-weight: bold;
-    color:var(--dark-700)
+    color:var(--dark-700);
+`
+
+export const LabelImage = styled.label`
+    width: 100%;
+    height: 280px;
+    background-color: var(--dark-900);
+    margin-bottom: 1rem;
+    border-radius: 0.3rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+
+    input{ 
+        display: none;
+    }
+
+    span {
+        z-index: 99;
+        position: absolute;
+        opacity: 0.7;
+        transition: all 0.5s;
+    }
+
+    span:hover{
+        opacity: 1;
+        transform: scale(1.2);
+    }
+
+`
+export const ImagePreview = styled.img`
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    border-radius: 0.3rem;
 `
