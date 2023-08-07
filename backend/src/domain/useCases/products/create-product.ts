@@ -1,6 +1,7 @@
 type ProductData = {
   name: string;
   price: string;
+  banner?: string;
   description: string;
   categoryId: string;
 };

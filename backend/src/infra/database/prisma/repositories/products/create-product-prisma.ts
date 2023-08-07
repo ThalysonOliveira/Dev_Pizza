@@ -6,7 +6,13 @@ import prismaClient from '../..';
 class CreateProductPrisma implements CreateProductRepository {
   execute(input: ProductData): Promise<Product> {
     return prismaClient.product.create({
-      data: input as any,
+      data: {
+        name: input.name,
+        banner: input.banner,
+        description: input.description,
+        price: input.price,
+        category_id: input.categoryId,
+      },
     }) as Promise<Product>;
   }
 }
