@@ -10,10 +10,16 @@ import {
   LabelImage,
   TextAreaCategory,
 } from "./styles";
-import { ChangeEvent, useState } from "react";
+import { ChangeEvent, FormEvent, HtmlHTMLAttributes, useState } from "react";
 import { FiUpload } from "react-icons/fi";
-import { FIND_ALL_CATEGORIES } from "@/api/querys";
+import {
+  CREATE_PRODUCT,
+  FIND_ALL_CATEGORIES,
+  UPLOAD_IMAGE,
+} from "@/api/querys";
 import { setupAPIClient } from "@/api/dev-pizza-api";
+import { useMutation } from "@apollo/client";
+import { toast } from "react-toastify";
 
 type ItemProps = {
   id: string;
@@ -29,6 +35,12 @@ export default function Product({ categoryList }: CategoryProps) {
   const [imgFile, setImgFile] = useState(null) as any;
   const [categories, setCategories] = useState(categoryList || []);
   const [categorySelected, setCategorySelected] = useState(0);
+  const [uploadImage] = useMutation(UPLOAD_IMAGE);
+  const [createProduct] = useMutation(CREATE_PRODUCT);
+  const [name, setName] = useState("");
+  const [price, setPrice] = useState(0);
+  const [description, setDescription] = useState("");
+  const [categoryId, setCategoryId] = useState("");
 
   function handleFile(event: ChangeEvent<HTMLInputElement>) {
     if (!event.target.files) return;
@@ -47,7 +59,63 @@ export default function Product({ categoryList }: CategoryProps) {
   }
 
   function handleChangeCategory(event: ChangeEvent<HTMLSelectElement>) {
+    setCategoryId(categories[Number(event.target.value)].id);
     setCategorySelected(Number(event.target.value));
+  }
+
+  const convertToBase64 = (file: any) => {
+    return new Promise((resolve, reject) => {
+      const fileReader = new FileReader();
+      fileReader.readAsDataURL(file);
+      fileReader.onload = () => {
+        resolve(fileReader.result);
+      };
+      fileReader.onerror = (error) => {
+        reject(error);
+      };
+    });
+  };
+
+  async function handleAddProduct(event: FormEvent) {
+    event.preventDefault();
+
+    if (!name || !description || !categoryId || !price || !imgUrl)
+      return toast.warning("Todos os campos devem estar preenchidos");
+
+    const base64 = await convertToBase64(imgFile);
+
+    try {
+      const { data } = await uploadImage({
+        variables: {
+          input: {
+            file: base64,
+            name: imgFile.name,
+            type: imgFile.type,
+          },
+        },
+      });
+
+      createProduct({
+        variables: {
+          input: {
+            name,
+            price,
+            description,
+            banner: data.uploadImage || "",
+            categoryId,
+          },
+        },
+      })
+        .then(() => toast.success("Produto cadastrado com sucesso."))
+        .catch((error) => toast.error(error.message));
+    } catch (error) {
+      toast.error("Erro ao inserir a imagem.");
+    }
+
+    setName("");
+    setPrice(0);
+    setDescription("");
+    setImgUrl("");
   }
 
   return (
@@ -60,7 +128,7 @@ export default function Product({ categoryList }: CategoryProps) {
         <Container>
           <h1>Novo produto</h1>
 
-          <FormCategory>
+          <FormCategory onSubmit={handleAddProduct}>
             <LabelImage>
               <span>
                 <FiUpload size={30} color="#FFF" />
@@ -85,11 +153,25 @@ export default function Product({ categoryList }: CategoryProps) {
               })}
             </select>
 
-            <InputCategory type="text" placeholder="Digite o nome do produto" />
+            <InputCategory
+              type="text"
+              placeholder="Digite o nome do produto"
+              value={name}
+              onChange={(event: any) => setName(event.target.value)}
+            />
 
-            <InputCategory type="text" placeholder="Preço do produto" />
+            <InputCategory
+              type="number"
+              placeholder="Preço do produto"
+              value={price}
+              onChange={(event: any) => setPrice(event.target.value)}
+            />
 
-            <TextAreaCategory placeholder="Descreva o seu produto" />
+            <TextAreaCategory
+              placeholder="Descreva o seu produto"
+              value={description}
+              onChange={(event: any) => setDescription(event.target.value)}
+            />
 
             <ButtonAddCategory type="submit">Cadastrar</ButtonAddCategory>
           </FormCategory>
