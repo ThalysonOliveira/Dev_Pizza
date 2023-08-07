@@ -1,5 +1,4 @@
 input File {
-  filename: String!
-  mimetype: String!
-  encoding: String!
+  name: String!
+  type: String
 }

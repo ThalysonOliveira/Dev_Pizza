@@ -20,11 +20,11 @@ class UploadImageAdapter implements UploadImage {
     });
   }
 
-  async execute(image: any): Promise<void> {
+  async execute(image: File): Promise<void> {
     try {
       const command = new PutObjectCommand({
         Bucket: SDK_BUCKET_NAME,
-        Key: image.filename,
+        Key: image.name,
         Body: Buffer.from(JSON.stringify(image)),
       });
       await this.client.send(command);
