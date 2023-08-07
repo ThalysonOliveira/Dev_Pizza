@@ -3,6 +3,7 @@ import usersResolver from './users';
 import categoriesResolver from './categories';
 import productsResolver from './products';
 import orderResolver from './order';
+import uploadResolver from './upload';
 
 export default [
   ...usersResolver,
@@ -10,4 +11,5 @@ export default [
   categoriesResolver,
   productsResolver,
   orderResolver,
+  uploadResolver,
 ];

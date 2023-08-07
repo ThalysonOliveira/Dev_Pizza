@@ -3,6 +3,7 @@ import usersTypeDefs from './users';
 import categoriesTypeDefs from './categories';
 import productsTypeDefs from './products';
 import orderTypeDefs from './order';
+import uploadTypeDefs from './upload';
 
 export default [
   ...usersTypeDefs,
@@ -10,4 +11,5 @@ export default [
   categoriesTypeDefs,
   productsTypeDefs,
   orderTypeDefs,
+  uploadTypeDefs,
 ];
