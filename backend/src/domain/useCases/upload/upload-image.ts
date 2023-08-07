@@ -1,5 +1,5 @@
 interface UploadImage {
-  execute: (image: File) => Promise<void>;
+  execute: (image: File) => Promise<string>;
 }
 
 export { UploadImage };

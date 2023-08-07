@@ -4,8 +4,8 @@ import { UploadImage as UploadImageProtocol } from '@data/protocols/upload';
 class UploadImageService implements UploadImage {
   constructor(private uploadImage: UploadImageProtocol) {}
 
-  async execute(image: File): Promise<void> {
-    await this.uploadImage.execute(image);
+  async execute(image: File): Promise<string> {
+    return await this.uploadImage.execute(image);
   }
 }
 
