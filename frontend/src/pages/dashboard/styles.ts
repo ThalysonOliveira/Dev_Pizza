@@ -37,6 +37,7 @@ export const OrderItem = styled.section`
     background-color: var(--dark-900);
     align-items: center;
     border-radius: 0.3rem;
+    margin-bottom: 1rem;
 
     button {
         border: 0;

@@ -9,8 +9,29 @@ import {
   Tag,
 } from "./styles";
 import { FiRefreshCcw } from "react-icons/fi";
+import { setupAPIClient } from "@/api/dev-pizza-api";
+import { LIST_ORDERS } from "@/api/querys";
+import { useState } from "react";
 
-export default function Dashboard() {
+type ItemProps = {
+  id: string;
+  name: string;
+  table: string;
+  draft: boolean;
+  status: boolean;
+};
+
+type OrderProps = {
+  listOrders: ItemProps[];
+};
+
+export default function Dashboard({ listOrders }: OrderProps) {
+  const [orders, setOrders] = useState(listOrders || []);
+
+  function handleOpenModalView(id: string) {
+    alert(`Clicou no id: ${id}`);
+  }
+
   return (
     <>
       <Head>Painel - Dev Pizza</Head>
@@ -25,12 +46,14 @@ export default function Dashboard() {
         </HeaderContainer>
 
         <ListOrders>
-          <OrderItem>
-            <button>
-              <Tag />
-              <span>Mesa 30</span>
-            </button>
-          </OrderItem>
+          {orders.map((item) => (
+            <OrderItem key={item.id}>
+              <button onClick={() => handleOpenModalView(item.id)}>
+                <Tag />
+                <span>{item.table}</span>
+              </button>
+            </OrderItem>
+          ))}
         </ListOrders>
       </Container>
     </>
@@ -38,7 +61,12 @@ export default function Dashboard() {
 }
 
 export const getServerSideProps = canSSRAuth(async (ctx) => {
+  const apiClient = setupAPIClient(ctx as any);
+  const { data } = await apiClient.query({ query: LIST_ORDERS });
+
   return {
-    props: {},
+    props: {
+      listOrders: data.listOrders,
+    },
   };
 });
