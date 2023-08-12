@@ -10,8 +10,11 @@ import {
 } from "./styles";
 import { FiRefreshCcw } from "react-icons/fi";
 import { setupAPIClient } from "@/api/dev-pizza-api";
-import { LIST_ORDERS } from "@/api/querys";
+import { DETAIL_ORDER, LIST_ORDERS } from "@/api/querys";
 import { useState } from "react";
+import Modal from "react-modal";
+import { useQuery } from "@apollo/client";
+import { ModalOrder } from "@/components/ui/ModalOrder";
 
 type ItemProps = {
   id: string;
@@ -25,12 +28,50 @@ type OrderProps = {
   listOrders: ItemProps[];
 };
 
+export type OrderItemProps = {
+  id: string;
+  amount: number;
+  order_id: string;
+  product_id: string;
+  product: {
+    id: string;
+    name: string;
+    description: string;
+    banner: string;
+  };
+  order: {
+    id: string;
+    table: number;
+    name: string;
+    status: boolean;
+  };
+};
+
 export default function Dashboard({ listOrders }: OrderProps) {
   const [orders, setOrders] = useState(listOrders || []);
+  const [modalItem, setModalItem] = useState<OrderItemProps[]>();
+  const [modalVisible, setModalVisible] = useState(false);
 
-  function handleOpenModalView(id: string) {
-    alert(`Clicou no id: ${id}`);
+  function handleCloseModal() {
+    setModalVisible(false);
   }
+
+  async function handleOpenModalView(id: string) {
+    const apiClient = setupAPIClient();
+    const { data } = await apiClient.query({
+      query: DETAIL_ORDER,
+      variables: {
+        input: {
+          orderId: id,
+        },
+      },
+    });
+
+    setModalItem(data.detailOrder);
+    setModalVisible(true);
+  }
+
+  Modal.setAppElement("#__next");
 
   return (
     <>
@@ -56,6 +97,7 @@ export default function Dashboard({ listOrders }: OrderProps) {
           ))}
         </ListOrders>
       </Container>
+      {modalVisible && <ModalOrder />}
     </>
   );
 }
