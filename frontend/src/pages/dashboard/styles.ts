@@ -57,3 +57,8 @@ export const Tag = styled.div`
     border-radius: 0.3rem 0 0 0.3rem;
     margin-right: 1rem;
 `
+
+export const EmptyList = styled.span`
+   font-size: 1.2rem;
+   color: var(--gray-100);
+`

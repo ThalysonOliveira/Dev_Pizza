@@ -13,9 +13,15 @@ interface ModelOrderProps {
   isOpen: boolean;
   onRequestClose: () => void;
   order: OrderItemProps[];
+  handleFinishOrder: (id: string) => void;
 }
 
-export function ModalOrder({ isOpen, onRequestClose, order }: ModelOrderProps) {
+export function ModalOrder({
+  isOpen,
+  onRequestClose,
+  order,
+  handleFinishOrder,
+}: ModelOrderProps) {
   const customStyles = {
     content: {
       top: "50%",
@@ -54,7 +60,9 @@ export function ModalOrder({ isOpen, onRequestClose, order }: ModelOrderProps) {
           </ContainerItem>
         ))}
 
-        <OrderButton onClick={() => {}}>Concluir pedido</OrderButton>
+        <OrderButton onClick={() => handleFinishOrder(order[0].order.id)}>
+          Concluir pedido
+        </OrderButton>
       </Container>
     </Modal>
   );

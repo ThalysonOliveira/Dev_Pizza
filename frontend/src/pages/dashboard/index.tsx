@@ -3,6 +3,7 @@ import { canSSRAuth } from "../../utils/canSSRAuth";
 import { Header } from "@/components/ui/Header";
 import {
   Container,
+  EmptyList,
   HeaderContainer,
   ListOrders,
   OrderItem,
@@ -10,10 +11,10 @@ import {
 } from "./styles";
 import { FiRefreshCcw } from "react-icons/fi";
 import { setupAPIClient } from "@/api/dev-pizza-api";
-import { DETAIL_ORDER, LIST_ORDERS } from "@/api/querys";
+import { DETAIL_ORDER, FINISH_ORDER, LIST_ORDERS } from "@/api/querys";
 import { useState } from "react";
 import Modal from "react-modal";
-import { useQuery } from "@apollo/client";
+import { useMutation } from "@apollo/client";
 import { ModalOrder } from "@/components/ui/ModalOrder";
 
 type ItemProps = {
@@ -51,6 +52,7 @@ export default function Dashboard({ listOrders }: OrderProps) {
   const [orders, setOrders] = useState(listOrders || []);
   const [modalItem, setModalItem] = useState<OrderItemProps[]>();
   const [modalVisible, setModalVisible] = useState(false);
+  const [finishOrder] = useMutation(FINISH_ORDER);
 
   function handleCloseModal() {
     setModalVisible(false);
@@ -71,6 +73,33 @@ export default function Dashboard({ listOrders }: OrderProps) {
     setModalVisible(true);
   }
 
+  async function handleFinishItem(id: string) {
+    await finishOrder({
+      variables: {
+        input: {
+          orderId: id,
+        },
+      },
+    });
+
+    const apiClient = setupAPIClient();
+    const { data } = await apiClient.query({
+      query: LIST_ORDERS,
+    });
+
+    setOrders(data.listOrders);
+    setModalVisible(false);
+  }
+
+  async function handleRefreshOrders() {
+    const apiClient = setupAPIClient();
+    const { data } = await apiClient.query({
+      query: LIST_ORDERS,
+    });
+
+    setOrders(data.listOrders);
+  }
+
   Modal.setAppElement("#__next");
 
   return (
@@ -81,12 +110,16 @@ export default function Dashboard({ listOrders }: OrderProps) {
       <Container>
         <HeaderContainer>
           <h1>Últimos pedidos</h1>
-          <button>
+          <button onClick={handleRefreshOrders}>
             <FiRefreshCcw color="#3FFFA3" size={25} />
           </button>
         </HeaderContainer>
 
         <ListOrders>
+          {!orders.length && (
+            <EmptyList>Nenhum pedido aberto foi encontrado...</EmptyList>
+          )}
+
           {orders.map((item) => (
             <OrderItem key={item.id}>
               <button onClick={() => handleOpenModalView(item.id)}>
@@ -102,6 +135,7 @@ export default function Dashboard({ listOrders }: OrderProps) {
           isOpen={modalVisible}
           onRequestClose={handleCloseModal}
           order={modalItem as any}
+          handleFinishOrder={handleFinishItem}
         />
       )}
     </>
