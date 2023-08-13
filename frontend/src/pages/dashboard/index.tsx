@@ -97,7 +97,13 @@ export default function Dashboard({ listOrders }: OrderProps) {
           ))}
         </ListOrders>
       </Container>
-      {modalVisible && <ModalOrder />}
+      {modalVisible && (
+        <ModalOrder
+          isOpen={modalVisible}
+          onRequestClose={handleCloseModal}
+          order={modalItem as any}
+        />
+      )}
     </>
   );
 }
