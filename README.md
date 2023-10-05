@@ -8,8 +8,8 @@
 </p>
 
 <p align="center">
-  <img alt="Cadastro" src="https://i.imgur.com/VzkflnR.png" width="40%" height=350px>
-  <img alt="Autenticação" src="https://i.imgur.com/2ixadT3.png" width="40%" height=350px>
+  <img alt="Cadastro" src="https://i.imgur.com/VzkflnR.png" width="49%" height=350px>
+  <img alt="Autenticação" src="https://i.imgur.com/2ixadT3.png" width="49%" height=350px>
   
 </p>
 
